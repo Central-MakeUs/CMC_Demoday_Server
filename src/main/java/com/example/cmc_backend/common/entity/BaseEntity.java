@@ -30,8 +30,4 @@ public class BaseEntity {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    @Column(name = "status")
-    @ColumnDefault("ACTIVE")
-    private Status status = Status.ACTIVE;
 }

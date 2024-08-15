@@ -1,6 +1,7 @@
 package com.example.cmc_backend.user.service;
 
 import static com.example.cmc_backend.common.exception.errorCode.UserAuthErrorCode.*;
+import static com.example.cmc_backend.user.exception.UserAuthErrorCode.*;
 
 import com.example.cmc_backend.common.exception.NotFoundException;
 import com.example.cmc_backend.jwt.JwtService;
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserRes.Token logIn(UserReq.LoginUserInfo loginUserInfo){
 
-        User user=userRepository.findByUsernameAndPhoneNumber(loginUserInfo.getUsername(), loginUserInfo.getPhoneNumber()).orElseThrow(() -> new NotFoundException(NOT_EXIST_USER));
+        User user=userRepository.findByUsername(loginUserInfo.getUsername()+"_"+loginUserInfo.getPhoneNumber()).orElseThrow(() -> new NotFoundException(NOT_EXIST_USER));
 
         Long userId = user.getId();
 
@@ -51,7 +52,7 @@ public class UserServiceImpl implements UserService {
     public UserRes.Token signUp(UserReq.SignupUser signupUser) {
         String passwordEncoded=passwordEncoder.encode(signupUser.getPhone());
 
-        User user = UserConvertor.SignUpUser(signupUser, passwordEncoded);
+        User user = UserConvertor.signUpUser(signupUser, passwordEncoded);
 
         Long userId=userRepository.save(user).getId();
 
@@ -80,5 +81,16 @@ public class UserServiceImpl implements UserService {
         Matcher matcher = pattern.matcher(phone);
 
         return matcher.matches();
+    }
+
+    @Override
+    @Transactional
+    public void applyParticipate(UserReq.ApplyParticipate applyParticipate) {
+        if(userRepository.existsByUsername(applyParticipate.getUsername()+"_"+applyParticipate.getPhoneNumber())){
+            throw new NotFoundException(ALREADY_EXIST_USER);
+        }
+        String passwordEncoded=passwordEncoder.encode(applyParticipate.getPhoneNumber());
+        User user = UserConvertor.applyParticipate(applyParticipate, passwordEncoded);
+        userRepository.save(user);
     }
 }

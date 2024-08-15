@@ -13,4 +13,6 @@ public interface UserService {
     boolean validationPassword(String password);
 
     boolean validationPhoneNumber(String phone);
+
+    void applyParticipate(UserReq.ApplyParticipate applyParticipate);
 }
