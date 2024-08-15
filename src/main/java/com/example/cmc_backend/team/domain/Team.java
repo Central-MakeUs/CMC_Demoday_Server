@@ -97,8 +97,9 @@ public class Team extends BaseEntity {
 	private List<TeamMember> teamMembers;
 
 	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
 	@ColumnDefault("ACTIVE")
-	private Status status = Status.ACTIVE;
+	private Status status;
 
 }
 

@@ -1,7 +1,7 @@
 package com.example.cmc_backend.user.service;
 
 import static com.example.cmc_backend.common.exception.errorCode.UserAuthErrorCode.*;
-import static com.example.cmc_backend.user.exception.UserAuthErrorCode.*;
+import static com.example.cmc_backend.user.exception.ApplyParticipateErrorCode.*;
 
 import com.example.cmc_backend.common.exception.NotFoundException;
 import com.example.cmc_backend.jwt.JwtService;
@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

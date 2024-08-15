@@ -57,5 +57,5 @@ public class TeamMember extends BaseEntity {
 	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
 	@ColumnDefault("ACTIVE")
-	private Status status = Status.ACTIVE;
+	private Status status;
 }
