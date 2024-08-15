@@ -30,16 +30,23 @@ public class UserController {
     }
 
 
-    @PostMapping("/signup")
+  /*  @PostMapping("/signup")
     public CommonResponse<UserRes.Token> signup(@Valid @RequestBody UserReq.SignupUser signupUser) {
         UserRes.Token token = userService.signUp(signupUser);
 
         return CommonResponse.onSuccess(token);
+    }*/
+
+    @PostMapping("/apply")
+    @Operation(summary = "참여 신청", description = "참여 신청")
+    public CommonResponse<String> applyParticipate(@Valid @RequestBody UserReq.ApplyParticipate applyParticipate) {
+        userService.applyParticipate(applyParticipate);
+        return CommonResponse.onSuccess("신청 완료");
     }
 
-    @GetMapping("/validate")
+    /*@GetMapping("/validate")
     @Operation(summary = "유저 토큰 검증", description = "유저 토큰 검증")
     public CommonResponse<String> checkUserToken(@AuthenticationPrincipal User user) {
         return CommonResponse.onSuccess(user.getUsername());
-    }
+    }*/
 }

@@ -2,6 +2,9 @@ package com.example.cmc_backend.user.domain;
 
 import com.example.cmc_backend.common.entity.BaseEntity;
 import com.example.cmc_backend.common.entity.enums.Status;
+import com.example.cmc_backend.user.domain.enums.InfoChannel;
+import com.example.cmc_backend.user.domain.enums.ParticipationClassification;
+import com.example.cmc_backend.user.domain.enums.UserClassification;
 
 import lombok.*;
 
@@ -55,10 +58,20 @@ public class User extends BaseEntity implements UserDetails{
     @Column(name="role")
     private String role;
 
+    @Enumerated(EnumType.STRING)
+    private UserClassification userClassification;
+
+
+    @Enumerated(EnumType.STRING)
+    private ParticipationClassification participationClassification;
+
+    @Enumerated(EnumType.STRING)
+    private InfoChannel infoChannel;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     @ColumnDefault("ACTIVE")
-    private Status status = Status.ACTIVE;
+    private Status status;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
