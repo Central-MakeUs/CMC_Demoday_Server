@@ -2,6 +2,8 @@ package com.example.cmc_backend.invest.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -55,6 +57,7 @@ public class InvestCoin extends BaseEntity {
 	private String usedYN;
 
 	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
 	@ColumnDefault("ACTIVE")
-	private Status status = Status.ACTIVE;
+	private Status status;
 }

@@ -1,4 +1,4 @@
-package com.example.cmc_backend.user.exception;
+package com.example.cmc_backend.team.exception;
 
 import static org.springframework.http.HttpStatus.*;
 
@@ -16,13 +16,13 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum UserAuthErrorCode implements BaseErrorCode {
+public enum TeamErrorCode implements BaseErrorCode {
     /*
        인증 관련 에러코드
     */
 
-    @ExplainError("이미 해당 정보로 신청한 경우 발생되는 에러 코드")
-    ALREADY_EXIST_USER(BAD_REQUEST,"USER_001", "이미 해당 정보로 신청하였습니다.");
+    @ExplainError("해당 팀이 존재하지 않는 경우")
+    NOT_EXISTS_TEAM(NOT_FOUND,"TEAM_001", "팀이 존재하지 않습니다.");
 
 
     private final HttpStatus httpStatus;

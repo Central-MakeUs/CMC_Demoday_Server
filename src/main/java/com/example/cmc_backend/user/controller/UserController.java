@@ -1,12 +1,15 @@
 package com.example.cmc_backend.user.controller;
 
 import com.example.cmc_backend.common.CommonResponse;
+import com.example.cmc_backend.common.annotiation.ApiErrorCodeExample;
 import com.example.cmc_backend.user.domain.User;
 import com.example.cmc_backend.user.dto.UserReq;
 import com.example.cmc_backend.user.dto.UserRes;
+import com.example.cmc_backend.user.exception.ApplyParticipateErrorCode;
 import com.example.cmc_backend.user.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,6 +20,7 @@ import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @RestController
+@Tag(name = "유저", description = "유저 관련 API")
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
@@ -38,6 +42,7 @@ public class UserController {
     }*/
 
     @PostMapping("/apply")
+    @ApiErrorCodeExample(ApplyParticipateErrorCode.class)
     @Operation(summary = "참여 신청", description = "참여 신청")
     public CommonResponse<String> applyParticipate(@Valid @RequestBody UserReq.ApplyParticipate applyParticipate) {
         userService.applyParticipate(applyParticipate);
